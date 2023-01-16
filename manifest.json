@@ -1,7 +1,7 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "OtodomJade",
-    "version": "1.0",
+    "version": "1.0.1",
   
     "description": "Adds info about shortest public transport travel time to city center",
   
@@ -13,13 +13,22 @@
         "activeTab"
     ],
 
-    "browser_action": {
-        "default_icon": "icons/otodomjade-32.png",
-        "default_title": "otodomjade"
+    "action": {
+        "default_icon": {
+            "32": "icons/otodomjade-32.png"
+        }
     },
 
+    "content_scripts": [
+        {
+          "js": ["otodomjade.js"],
+          "matches": [
+            "https://*.otodom.pl/*"
+          ]   
+        }
+    ],
+
     "background": {
-        "scripts": ["otodomjade.js"]
+        "service_worker": "background.js"
     }
   }
-  

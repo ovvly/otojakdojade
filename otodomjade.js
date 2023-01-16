@@ -1,19 +1,21 @@
+var script = document.getElementById("__NEXT_DATA__");
+var json = script.text;
+var data = JSON.parse(json);
+var adData = data.props.pageProps.adTrackingData;
+var lat = adData.lat;
+var long = adData.long;
+var url = `https://jakdojade.pl/warszawa/trasa/?fc=${lat}:${long}&tc=52.31420522649696:20.959419667518077`;
 
-console.log("script start")
+var button = document.createElement("button");
+var title = document.createTextNode("jakdojade");
+button.appendChild(title);
 
-// let script = document.getElementById("__NEXT_DATA__");
-// let json = script.text;
-// let data = JSON.parse(json);
-// console.log("data parsed")
-// console.log(data);
+var next = document.getElementById("__next");
+next.appendChild(button);
 
-// chrome.browserAction.onClicked.addListener(function(tab) {
-//     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-//         var activeTab = tabs[0];
-//         chrome.tabs.create({
-//             url: "https://jakdojade.pl/warszawa/trasa/" + "10",
-//             index: activeTab.index + 1,
-//             active: true
-//         });
-//     });
-// });
+button.addEventListener("click", () => {
+    chrome.runtime.sendMessage({
+        'lat': lat,
+        'long': long
+    })
+});
