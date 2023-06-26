@@ -10,7 +10,7 @@ var title = document.createTextNode("jakdojade");
 button.appendChild(title);
 
 var next = document.getElementById("__next");
-next.firstChild.prepend(button);
+next.childNodes[1].prepend(button);
 
 button.addEventListener("click", () => {
     chrome.runtime.sendMessage({
